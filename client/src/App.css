@@ -1,0 +1,116 @@
+.App {
+  text-align: unset;
+  background-color: #282c34;
+ 
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 30vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  
+  /* margin-top: -250px */
+}
+.main-container{
+  /* margin-top: -50px; */
+  min-height: 95vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(5px + 2vn);
+  color: white;
+}
+
+.chat{
+  margin:1px;
+  width:auto;
+  height:auto;
+  display: grid;
+  padding-left: 2px;
+  
+  
+}
+.chatPage{
+  display: flex;
+  justify-content: flex-start;
+  height: 100%;
+  /* display:grid;
+  grid-row-start: span 3; */
+}
+.chatContainer{
+  margin-top: 1px;
+  margin-left: 1px;
+  height: 100%;
+  display: flex;
+  width:100%;
+  flex-direction: column;
+  min-height: 
+}
+.chatInfo{
+  overflow: auto;
+  height: 583px;
+  
+}
+.chatInput{
+  padding-top: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width:95%;
+  align-items: flex-start;
+    display: flex;
+    justify-content: center;
+}
+.chatMenu{
+  /* grid-row-start: span 3; */
+  margin-top:2px;
+  margin-right: 1px;
+  z-index:1;
+  top: 0;
+  left: 0;
+  height:auto;
+  width:250px;
+  background-color: #101516;
+
+}
+.user{
+  background-color: #101516;
+  color: aliceblue;
+}
+.userY{
+  background-color: #b7be4b;
+}
+
+.userB{
+  background-color:  #59a4a7;
+}
+
+.userP{
+  background-color: #7d59a7;
+}
+.cardTitle{
+  color: rgb(253, 43, 43);
+  font-weight: bold;
+  text-align: left;
+  
+}
+.cardText{
+  text-align: initial; 
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
