@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardBody, Button, CardTitle, CardText,NavItem,Nav } from 'reactstrap';
+import {NavItem,Nav } from 'reactstrap';
 // import { render } from 'timeago.js';
 import Contacts from '../components/contacts';
 
@@ -8,7 +8,7 @@ class ChatMenu extends React.Component{
         super(props)
 
         this.state ={
-            users:[{name:'Gekko'},{name:"Vivek"},{name:"Sagar Gujaraticsccc"}]
+            users:[{id:0,name:'Gekko'},{id:1,name:"Vivek"},{id:2,name:"Sagar Gujaraticsccc"}]
         }
     }
     
@@ -21,7 +21,10 @@ render(){
                 {this.state.users.map(user => {
                     return(
                         <Contacts
-                        name={user.name} />
+                        key={user.id}
+                        id={user.id}
+                        name={user.name}
+                        />
                     )
                 })}
             </NavItem>

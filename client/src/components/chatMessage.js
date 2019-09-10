@@ -1,10 +1,10 @@
 import React from 'react';
-import { Card, CardBody, Button, CardTitle, CardText, } from 'reactstrap';
+import { Card, CardBody,CardTitle, CardText, } from 'reactstrap';
 
 const Chat = (props) => {
 
     return (
-        <div id={props.id} className={props.class}>
+        <div key={props.id} className={props.class}>
         <Card className="chat">
             <CardBody>
 

@@ -1,6 +1,5 @@
 import React, {Fragment} from 'react';
 // import { Chat } from '@progress/kendo-react-conversational-ui';
-import { Row } from 'reactstrap';
 import Chat  from '../components/chatMessage';
 import ChatMenu from '../components/chatMenu';
 import Input from '../components/inputMessage';
@@ -30,73 +29,73 @@ class ChatRoom extends React.Component {
                 user_name:'Sagar',
                 message:"Lets play pubg,blahhhh blahhhh blahhhh blahhhhblahhhhblahhhh "
             },{
-                id:2,
+                id:5,
                 user_name:'Vineeth',
                 message:"Whats up"
             },
             {
-                id:3,
+                id:6,
                 user_name:'Vivek',
                 message:"Busy cant talk right now"
             },
             {
-                id:4,
+                id:7,
                 user_name:'Sagar',
                 message:"Lets play pubg,blahhhh blahhhh blahhhh blahhhhblahhhhblahhhh "
             },{
-                id:2,
+                id:8,
                 user_name:'Vineeth',
                 message:"Whats up"
             },
             {
-                id:3,
+                id:9,
                 user_name:'Vivek',
                 message:"Busy cant talk right now"
             },
             {
-                id:4,
+                id:10,
                 user_name:'Sagar',
                 message:"Lets play pubg,blahhhh blahhhh blahhhh blahhhhblahhhhblahhhh "
             },{
-                id:2,
+                id:11,
                 user_name:'Vineeth',
                 message:"Whats up"
             },
             {
-                id:3,
+                id:12,
                 user_name:'Vivek',
                 message:"Busy cant talk right now"
             },
             {
-                id:4,
+                id:13,
                 user_name:'Sagar',
                 message:"Lets play pubg,blahhhh blahhhh blahhhh blahhhhblahhhhblahhhh "
             },{
-                id:2,
+                id:14,
                 user_name:'Vineeth',
                 message:"Whats up"
             },
             {
-                id:3,
+                id:15,
                 user_name:'Vivek',
                 message:"Busy cant talk right now"
             },
             {
-                id:4,
+                id:16,
                 user_name:'Sagar',
                 message:"Lets play pubg,blahhhh blahhhh blahhhh blahhhhblahhhhblahhhh "
             },{
-                id:2,
+                id:17,
                 user_name:'Vineeth',
                 message:"Whats up"
             },
             {
-                id:3,
+                id:18,
                 user_name:'Vivek',
                 message:"Busy cant talk right now"
             },
             {
-                id:4,
+                id:19,
                 user_name:'Sagar',
                 message:"Lets play pubg,blahhhh blahhhh blahhhh blahhhhblahhhhblahhhh "
             }],
@@ -122,6 +121,7 @@ class ChatRoom extends React.Component {
                     return(   
                         <Chat
                         id={msg.id}
+                        key={msg.id}
                         class={"chat" + " user"}
                         user_name={msg.user_name} 
                         message={msg.message}/>
@@ -139,10 +139,3 @@ class ChatRoom extends React.Component {
 }
 
 export default ChatRoom;
-
-{/* <Chat user={this.state.user}
-                    messages={this.state.messages}
-                    onMessageSend={this.addNewMessage}
-                    placeholder={"Type a message..."}
-                    width={400}>
-                </Chat> */}

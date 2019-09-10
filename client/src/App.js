@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Redirect, Route, Switch, NavLink } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 // import client from 'socket.io-client';
 import Topnav from './containers/Topnav';
 import register from './components/register';
 import login from './components/login';
 import ChatRoom from './containers/ChatRoom';
-import ChatMenu from './components/chatMenu';
+
 class App extends Component {
   constructor(props) {
 

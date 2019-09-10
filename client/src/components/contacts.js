@@ -1,15 +1,16 @@
 import React from 'react';
-import { Card, CardBody, Button, CardTitle, CardText,NavItem,Nav } from 'reactstrap';
+import { Card,CardTitle,} from 'reactstrap';
 import 'status-indicator/styles.css'
 
 
 
 const Contacts = (props) => {
 
+//    let status =(props.id % 2 == 0) ? "positive" : "negative"
     return (
-        <div className="contacts">
+        <div key= {props.id} className="contacts">
             
-                <Card>
+                <Card >
             <CardTitle>{props.name}
             <div className="status"><status-indicator positive></status-indicator></div>
             </CardTitle>

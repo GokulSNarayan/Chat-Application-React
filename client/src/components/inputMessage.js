@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, CardBody, Button, CardTitle, CardText, } from 'reactstrap';
-import { Input } from 'react-chat-elements'
+// import {  } from 'reactstrap';
+
 
 const InputMessage = (props) => {
 
