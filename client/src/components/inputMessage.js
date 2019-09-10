@@ -8,7 +8,7 @@ const InputMessage = (props) => {
 
         <div className="chatInput">
 
-            <textarea type="text" style={{width:95+"%"}}></textarea>
+            <textarea type="text" style={{width:95+"%",backgroundColor:"lightgrey"}}></textarea>
                 </div>
 
        

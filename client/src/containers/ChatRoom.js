@@ -100,7 +100,7 @@ class ChatRoom extends React.Component {
                 user_name:'Sagar',
                 message:"Lets play pubg,blahhhh blahhhh blahhhh blahhhhblahhhhblahhhh "
             }],
-            user:'Gekko'
+            
         }
     }
     addNewMessage = (event) => {
@@ -114,9 +114,7 @@ class ChatRoom extends React.Component {
 
                 <Fragment>
             <div className="chatMenu">
-            <ChatMenu
-            user_name={this.state.user}
-            />
+            <ChatMenu />
              </div>
             <div className="chatContainer">
                 <div className="chatInfo">
