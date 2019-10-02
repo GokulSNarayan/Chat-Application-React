@@ -5,10 +5,10 @@ const Chat = (props) => {
 
     return (
         <div key={props.id} className={props.class}>
-        <Card className="chat">
+        <Card className="">
             <CardBody>
 
-        <CardTitle className="cardTitle">{props.user_name}</CardTitle>
+        <CardTitle className="">{props.user_name}</CardTitle>
         <CardText>{props.message}</CardText>
             </CardBody>
         </Card>

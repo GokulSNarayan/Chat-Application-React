@@ -6,20 +6,20 @@ import { NavLink } from 'react-router-dom';
 class Topnav extends Component {
     render() {
         return (
-            <Nav className="navbar-inverse" >
+            <Nav className="flex items-center py-2 px-2 justify-start bg-teal-500 text-black font-medium" >
 
-                <div className="nav navbar-nav">
-                    <NavItem>
-                        <NavLink to='/login'>Login</NavLink>
+                
+                    <NavItem className="px-2 block border-b-2 border-transparent hover:border-black ">
+                        <NavLink  className="pb-2" to='/login'>Login</NavLink>
                     </NavItem>
-                    <NavItem>
-                        <NavLink to='/register'>Register</NavLink>
+                    <NavItem className="px-2 block border-b-2 border-transparent hover:border-black  ">
+                        <NavLink className="pb-2" to='/register'>Register</NavLink>
                     </NavItem>
-                    <NavItem>
-                        <NavLink to='/chatRoom'>Chat Room</NavLink>
+                    <NavItem className="px-2 block border-b-2 border-transparent hover:border-black  ">
+                        <NavLink className="pb-2" to='/chatRoom'>Chat Room</NavLink>
                     </NavItem>
 
-                </div>
+                
             </Nav>
         )
     }

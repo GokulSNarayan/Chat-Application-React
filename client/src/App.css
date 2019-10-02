@@ -1,3 +1,9 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
 .App {
   text-align: unset;
   background-color: #282c34;

@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import './App.css';
+// import './App.css';
+import './tailwind.css'
 // import client from 'socket.io-client';
+
 import Topnav from './containers/Topnav';
 import register from './components/register';
 import login from './components/login';
@@ -41,7 +43,7 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <div className="App">
+        <div className="mx-auto bg-gray-800">
           <Topnav />
           
             

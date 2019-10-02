@@ -15,7 +15,7 @@ class ChatMenu extends React.Component{
 render(){
 
     return (
-        <div className={"navbar-nav "}>
+        <div className="px-2">
             <Nav>
             <NavItem>
                 {this.state.users.map(user => {

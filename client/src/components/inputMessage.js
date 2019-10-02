@@ -6,9 +6,9 @@ const InputMessage = (props) => {
 
     return (
 
-        <div className="chatInput">
+        <div className="w-full">
 
-            <textarea type="text" style={{width:95+"%",backgroundColor:"lightgrey"}}></textarea>
+            <textarea style={{width:"70%"}} type="text"></textarea>
                 </div>
 
        

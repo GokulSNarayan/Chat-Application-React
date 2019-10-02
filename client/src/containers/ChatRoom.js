@@ -109,26 +109,29 @@ class ChatRoom extends React.Component {
     };
     render() {
         return (
-            <div className="chatPage">
+            <div className="flex flex-wrap flex-col items-start justify-start h-screen">
 
                 <Fragment>
-            <div className="chatMenu">
+            <div className="flex items-start h-screen shadow-md bg-gray-900">
             <ChatMenu />
              </div>
-            <div className="chatContainer">
-                <div className="chatInfo">
+            <div className="flex flex-wrap flex-col h-full w-full px-2">
+            
+                <div className="block overflow-y-scroll order-first" style={{height:"80%"}} >
                 {this.state.messages.map(msg => {
                     return(   
                         <Chat
                         id={msg.id}
                         key={msg.id}
-                        class={"chat" + " user"}
+                        
                         user_name={msg.user_name} 
                         message={msg.message}/>
                         )
                     })}
                     </div>
+                    <div className="order-last">
                 <Input />
+                </div>
             </div>
                 
             </Fragment>
