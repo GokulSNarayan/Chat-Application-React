@@ -109,15 +109,15 @@ class ChatRoom extends React.Component {
     };
     render() {
         return (
-            <div className="flex flex-wrap flex-col items-start justify-start h-screen">
+            <div className="flex mb-6 flex-wrap flex-col items-start justify-start h-screen">
 
                 <Fragment>
-            <div className="flex items-start h-screen shadow-md bg-gray-900">
+            <div className="flex w-1/6 items-start h-screen shadow-md bg-gray-900">
             <ChatMenu />
              </div>
-            <div className="flex flex-wrap flex-col h-full w-full px-2">
+            <div className="w-5/6 block h-full px-1">
             
-                <div className="block overflow-y-scroll order-first" style={{height:"80%"}} >
+                <div className="block overflow-y-scroll order-first" style={{height:"85%"}} >
                 {this.state.messages.map(msg => {
                     return(   
                         <Chat

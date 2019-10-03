@@ -43,7 +43,7 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <div className="mx-auto bg-gray-800">
+        <div className="bg-gray-800">
           <Topnav />
           
             
