@@ -9,10 +9,18 @@ var mongoose = require('mongoose');
 var swaggerUi = require('swagger-ui-express');
 var swaggerDoc = require('./swagger.json');
 var helmet = require('helmet');
+var cors = require('cors');
 
+var corsOption = {
+  origin: true,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  exposedHeaders: ['x-auth-token']
+};
 
 var app = express();
 
+app.use(cors(corsOption));
 app.use(helmet())
 app.use(logger('dev'));
 app.use(express.json());
@@ -64,7 +72,7 @@ app.use(function(req, res, next) {
   
   
   
-  var port = 3000;
+  var port = process.env.PORT || 4000;
 
 
 /**

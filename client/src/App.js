@@ -43,8 +43,8 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <div className="bg-gray-800">
           <Topnav />
+        <div className="bg-gray-800" style={{height:"94vh"}}>
           
             
             <Switch>

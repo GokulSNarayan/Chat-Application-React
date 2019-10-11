@@ -1,7 +1,8 @@
 var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
-
+var users = [];
+var connections = [];
 app.get('/', (req, res) => {
   res.sendFile('index.html', {root: __dirname })
 })
@@ -9,29 +10,41 @@ app.get('/', (req, res) => {
 
 var players = [];
 io.on("connection", (socket) => {
-  //  console.log("Id",socket)
+  connections.push(socket);
 
-  socket.on('chat message', function(msg){
-      io.emit('chat message',socket.id, msg);
+  socket.on('send message', function(msg){
+    console.log("Messg",msg)
+    let data = [socket.id, msg];
+    let newData = {
+      id: socket.id,
+      user_name: socket.id,
+      message: msg
+    }
+      io.emit('new message',newData);
     });
 
-  // socket.on('keypressed',(key)=>{
-  //   console.log(`Key pressed by ${socket.id} is ${key}`)
-  // })
-  // socket.join('mmr11')
-
-  // socket.on('keypressed', (key) => {
-  //   console.log(`Key pressed by ${socket.id} is ${key}`)
-  // })
-
+  
+    socket.on('new user',function(data, callback){
+      callback(true);
+      socket.username = data;
+      users.push(socket.username);
+      updatedUserName();
+  })
 
   socket.on('disconnect', () => {
     console.log(socket.id, 'disconnected');
   });
 })
 
-http.listen(4000, () => {
-  console.log("Listenening on port 4000");
+// console.log( io );
+
+http.listen(4008, () => {
+  console.log("Listenening on port 4008");
 })
+
+function updatedUserName(){
+	console.log("socket.id---",socket.id);
+        io.sockets.emit('get users',users);
+    }
 
 

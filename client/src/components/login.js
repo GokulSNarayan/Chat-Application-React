@@ -12,13 +12,15 @@ const Login = (props) => {
 
 
    const handleLogin = () => {
-        // axios.post(`${API_URL}/`)
+        axios.post(`${API_URL}/users/login`,{email,password})
+        .then(res => 
+            console.log("response",res))
     }
 
 
     // console.log("email=====>>",email)
     return (
-        <div className="flex flex-wrap flex-col items-center justify-start h-screen">
+        <div className="flex flex-wrap flex-col items-center justify-start">
         <Fragment>
         <div>
         
