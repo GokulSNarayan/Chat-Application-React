@@ -5,13 +5,7 @@ import React from 'react';
 const InputMessage = (props) => {
 
     return (
-
-        <div className="w-full">
-
-            <textarea style={{width:"70%"}} type="text"></textarea>
-                </div>
-
-       
+        <textarea className="border-2 border-black pl-4 pt-2" style={{ width: "85%" }} type="text"></textarea>
     )
 
 }

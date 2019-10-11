@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  test-proj-api:
+    container_name: backend
+    build: ./
+    command: npm start
+    working_dir: /usr/src/testProject
+    ports:
+      - "3000:3000"
+    links:
+      - redis
+    environment:
+      REDIS_URI:  redis://redis:6379
+    volumes:
+      - ./:/usr/src/testProject #mapping the local dir to container dir to watch for changes
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"

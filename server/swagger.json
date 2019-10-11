@@ -1,0 +1,254 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Test Project API",
+    "version" : "1.0.0",
+    "title" : "Test Project",
+    "contact" : {
+      "email" : "you@your-company.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host" : "192.168.10.59:3000",
+  "basePath" : "/",
+  "tags" : [ {
+    "name" : "Users",
+    "description" : "To perform CRUD operations."
+  } ],
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/users/register" : {
+      "post" : {
+        "tags" : [ "Users" ],
+        "summary" : "Creates a new user",
+        "description" : "Adds a new user to the database",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "Email",
+          "description" : "Email ID the new user",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Register"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "user created"
+          },
+          "0" : {
+            "description" : "invalid input, object invalid"
+          },
+          "409" : {
+            "description" : "user already exists"
+          }
+        }
+      }
+    },
+    "/users/login" : {
+      "post" : {
+        "tags" : [ "Users" ],
+        "summary" : "Logs in a user",
+        "description" : "Logs in a user and generate token",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "Login Credentials",
+          "description" : "Email ID and password of the user",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Login"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Logged in"
+          },
+          "401" : {
+            "description" : "Invalid Username or password"
+          }
+        }
+      }
+    },
+    "/users/getUserDetails" : {
+      "post" : {
+        "tags" : [ "Users" ],
+        "summary" : "Retrieves details of a user",
+        "description" : "Returns _id, Email and Phone of user",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Gets user details",
+            "schema": {
+                "$ref": "#/definitions/TokenRequired"
+            }
+        }
+         ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          }
+        }
+      }
+    },
+    "/users/updateUserDetails" : {
+      "post" : {
+        "tags" : [ "Users" ],
+        "summary" : "Updates Phone number of a user",
+        "description" : "Returns _id, Email and Phone of user after updating",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Gets user details",
+            "schema": {
+                "$ref": "#/definitions/TokenRequired"
+            }
+          }, 
+          {
+          "in" : "body",
+          "name" : "Update Details",
+          "description" : "Phone number is updated",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Update"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          }
+        }
+      }
+    },
+    "/users/deleteUser" : {
+      "post" : {
+        "tags" : [ "Users" ],
+        "summary" : "Completely Deletes user from database",
+        "description" : "Deletes user",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Deletes user",
+            "schema": {
+                "$ref": "#/definitions/TokenRequired"
+            }
+        }
+         ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          }
+        }
+      }
+    },
+    "/users/uploadPic" : {
+      "post" : {
+        "tags" : [ "Users" ],
+        "summary" : "Upload profile pic of a user",
+        "description" : "Uploads pic of user",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Deletes user",
+            "schema": {
+                "$ref": "#/definitions/TokenRequired"
+            }
+        }, {
+          "name": "pic",
+          "in":"body",
+          "content": {
+            "image":""
+          }
+        }
+         ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Register" : {
+      "required" : [ "email", "password" ],
+      "properties" : {
+        "email" : {
+          "type" : "string",
+          "uniqueItems":true,
+          "example" : "gekko@gmail.com"
+        },
+        "password" : {
+          "type" : "string",
+          "uniqueItems": true
+        }
+      }
+    },
+    "Login" : {
+      "required": [
+          "email",
+          "password"
+      ],
+      "properties": {
+          "email": {
+              "type": "string",
+              "uniqueItems": true
+          },
+          "password": {
+              "type": "string",
+              "uniqueItems": true
+          }
+      }
+  },
+    "Update" : {
+      "type" : "object",
+      "required" : [ "phone" ],
+      "properties" : {
+        "phone" : {
+          "type" : "number",
+          "example" : 9.865326569E9
+        }
+      }
+    },
+    "TokenRequired": {
+      "required": [
+          "Authorization"
+      ],
+      "properties": {
+          "Authorization": {
+              "type": "string",
+              "uniqueItems": true
+          }
+      }
+  }
+  }
+}

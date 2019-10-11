@@ -1,0 +1,59 @@
+
+swagger: "2.0"
+info:
+  description: Dummy Project API
+  version: 1.0.0
+  title: Dummy Project
+  contact:
+    email: you@your-company.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: virtserver.swaggerhub.com
+basePath: /Intuz/EtherLegends/1.0.0
+tags:
+- name: Users
+  description: To perform CRUD operations.
+schemes:
+- https
+paths:
+  /users/register:
+    post:
+      tags:
+      - Users
+      summary: Creates a new user
+      description: Adds a new user to the database
+      operationId: addUser
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: Registration details
+        description: Email ID and password of the new user
+        required: false
+        schema:
+          $ref: '#/definitions/User'
+      responses:
+        201:
+          description: user created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: user already exists
+definitions:
+  User:
+    type: object
+    required:
+    - email
+    - password
+    properties:
+      email:
+        type: string
+        example: gekko@gmail.com
+      password:
+        type: string
+      phone:
+        type: number
+        example: 9.24563982E9

@@ -51,7 +51,7 @@ class App extends Component {
               <Route path={'/login'} component={login} />
               <Route path={'/register'} component={register} />
               <Route path={'/chatRoom'} component={ChatRoom} />
-              <Redirect to='/login' />
+              <Redirect to='/login' from="/" />
             </Switch>
             
           
