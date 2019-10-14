@@ -1,17 +1,22 @@
 import React from 'react';
-import { Card, CardBody,CardTitle, CardText, } from 'reactstrap';
+import { Card, CardBody, CardTitle, CardText,CardImg } from 'reactstrap';
+import img1 from '../images/img_avatar.png';
 
+import moment from 'moment';
 const Chat = (props) => {
 
     return (
-        <div key={props.id} className="flex flex-col ">
-        <Card className="shadow-sm border-b-2 border-gray-500 bg-gray-800 ">
-            <CardBody>
-
-        <CardTitle className="text-red-700 px-2 pt-1 object-left-top w-40">{props.user_name}</CardTitle>
-        <CardText className="text-white font-thin px-2 pb-1">{props.message}</CardText>
-            </CardBody>
-        </Card>
+        <div key={props.id} className="flex flex-col " >
+            <Card className="shadow-sm border-b-2 flex items-center px-4 " style={{borderColor:"#40444B",padding:"16px 10px", }}>
+               
+                    <CardImg className="rounded-full object-left-top w-10 h-10 " src={img1} alt=""></CardImg>
+                
+                <CardBody>
+                    <CardTitle className="text-white px-2 pt-2 object-left-top w-40 text-md font-medium">{props.user_name}
+                    <span className="text-gray-600 px-2 text-sm font-light">3:26 pm</span></CardTitle>
+                    <CardText className="text-white font-thin px-2 pb-2 py-2 pl-4">{props.message}</CardText>
+                </CardBody>
+            </Card>
         </div>
     )
 

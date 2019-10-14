@@ -3,22 +3,13 @@ import {NavItem,Nav } from 'reactstrap';
 // import { render } from 'timeago.js';
 import Contacts from '../components/contacts';
 
-class ChatMenu extends React.Component{
-    constructor(props) {
-        super(props)
-
-        this.state ={
-            users:[{id:0,name:'Gekko'},{id:1,name:"Vivek"},{id:2,name:"Sagar Gujaraticsccc"}]
-        }
-    }
-    
-render(){
+const ChatMenu = (props) => {
 
     return (
-        <div className="px-2">
+        <div className="px-2" style={{backgroundColor:"#2F3136"}}>
             <Nav>
             <NavItem>
-                {this.state.users.map(user => {
+                {props.users.map(user => {
                     return(
                         <Contacts
                         key={user.id}
@@ -31,7 +22,5 @@ render(){
             </Nav>
         </div>
     )
-} 
-
 }
 export default ChatMenu;

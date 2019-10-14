@@ -13,8 +13,11 @@ const Login = (props) => {
 
    const handleLogin = () => {
         axios.post(`${API_URL}/users/login`,{email,password})
-        .then(res => 
-            console.log("response",res))
+        .then(res => {
+            console.log("res======>>>",res)
+            let {token} = res.data
+            localStorage.setItem('token',token)
+        })
     }
 
 

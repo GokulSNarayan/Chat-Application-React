@@ -41,7 +41,7 @@ const userModel = require('../models/user');
 //create
 router.post('/register', (req, res) => {
   var input = req.body;
-  if (input.email != '' && input.password != '') {
+  if (input.email != '' && input.password != '' && input.user_name != '') {
     userModel.findOne({ email: input.email })
       .then((result, err) => {
         if (result) {
@@ -56,7 +56,8 @@ router.post('/register', (req, res) => {
             console.log("Hashhhhhh", hash)
             let user_data = new userModel({
               "email": input.email,
-              "password": hash
+              "password": hash,
+              "user_name": input.user_name
             })
             user_data.save()
               .then((response) => {
@@ -99,9 +100,8 @@ router.post('/login', (req, res) => {
               res.json({
                 status: 1,
                 message: "Login successful.",
-                data: {
-                  token: jwt.sign({ _id: result._id }, secret_key, { expiresIn: 60*60 }),
-                }
+                token: jwt.sign({ _id: result._id }, secret_key, { expiresIn: 60*60 }),
+                
               });
             }
           })
@@ -125,9 +125,10 @@ router.post('/getUserDetails', auth.authenticate, (req, res) => {
       let data = {
         "_id": result._id,
         "email": result.email,
-        "profile_pic": profile_pic && profile_pic != '' ? `http://192.168.10.59:3000/${profile_pic}` : ''
+        "profile_pic": profile_pic && profile_pic != '' ? `http://192.168.10.59:3000/${profile_pic}` : '',
+        "user_name": result.user_name
       }
-      res.json({ status: 1, message: "Success", data: data })
+      res.json({ status: 1, message: "Success", result: data })
     })
     .catch((err) => {
       console.log("Error=========>>>>>>", err)
@@ -139,16 +140,16 @@ router.post('/getUserDetails', auth.authenticate, (req, res) => {
 router.post('/updateUserDetails', auth.authenticate, (req, res) => {
   let input = req.body
   let user_id = req.user_id;
-  if (input.phone != 0 && input.phone != '') {
-    userModel.findOneAndUpdate({ _id: user_id }, { phone: input.phone })
+  if (input.user_name != '') {
+    userModel.findOneAndUpdate({ _id: user_id }, { user_name: input.user_name })
       .then(() => {
-        res.json({ status: 1, message: "Updated Phone Number" })
+        res.json({ status: 1, message: "User Name Updated!" })
       })
       .catch(() => {
         res.json({ status: 0, message: "Error while updating" })
       })
   } else {
-    res.json({ status: 0, message: "Phone number not valid" })
+    res.json({ status: 0, message: "User Name not valid" })
   }
 })
 //delete

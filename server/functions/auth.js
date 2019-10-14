@@ -6,6 +6,7 @@ const userModel = require('../models/user');
 exports.func = () => {
     return {
         authenticate: (req, res, next) => {
+            // console.log("Headers",req)
             var token = req.headers['authorization']
             if (!token) {
                 return res.json({ status: 0, message: "No token provided" })

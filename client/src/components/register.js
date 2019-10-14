@@ -4,21 +4,24 @@ import {API_URL} from '../constants/defaultValues';
 import axios from 'axios';
 
 const Register = (props) => {
+    const [user_name, setUserName] = useState('')
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleRegister = () => {
-        axios.post(`${API_URL}/users/register`,{email,password})
+        axios.post(`${API_URL}/users/register`,{email,password,user_name})
         .then(res => 
             console.log("response",res))
     }
 
     return (
-        <div className="flex flex-wrap flex-col items-center justify-center">
+        <div className="flex flex-wrap flex-col items-center justify-center" style={{paddingTop:"20vh"}}>
         <Form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <FormGroup className="mb-4">
                 <Label className= "block text-gray-700 text-sm font-bold mb-2" for="userNameField">User Name</Label>
-                <Input className= "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  type="text" name="user_name" id="userNameField" placeholder="Gekko" />
+                <Input className= "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  type="text" name="user_name" id="userNameField" placeholder="Gekko" 
+                onChange={e => setUserName(e.target.value)}
+                value={user_name}/>
             </FormGroup>
             <FormGroup className="mb-4">
                 <Label className= "block text-gray-700 text-sm font-bold mb-2" for="emailField">Email</Label>
