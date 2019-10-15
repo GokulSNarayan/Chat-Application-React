@@ -1,13 +1,14 @@
 import React from 'react';
 import {NavItem,Nav } from 'reactstrap';
 // import { render } from 'timeago.js';
-import Contacts from '../components/contacts';
+import Contacts from './contacts';
 
-const ChatMenu = (props) => {
+const RightMenu = (props) => {
 
     return (
         <div className="px-2" style={{backgroundColor:"#2F3136"}}>
-            <Nav>
+            <h4 className="p-2" style={{color:"#8E9297"}}>ONLINE</h4>
+            <Nav className="px-2">
             <NavItem>
                 {props.users.map(user => {
                     return(
@@ -23,4 +24,4 @@ const ChatMenu = (props) => {
         </div>
     )
 }
-export default ChatMenu;
+export default RightMenu;
