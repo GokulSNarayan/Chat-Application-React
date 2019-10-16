@@ -144,14 +144,14 @@ class ChatRoom extends React.Component {
 
         // console.log("messagges",this.state.messages)
         return (
-            <div className="flex flex-wrap flex-row items-start justify-start " style={{ height:"700px", backgroundColor:"#363940"}} >
+            <div className="flex flex-wrap flex-row items-start justify-start " style={{ height:"700px", backgroundColor:"#363940", display:"contents"}} >
 
                 <Fragment>
                     <div className="flex w-1/6 items-start h-full shadow-md border-r-2 " style={{ height:"726px",borderColor:"#40444B",backgroundColor:"#2F3136"}} >
                         <LeftMenu 
                         channels={this.state.channels} />
                     </div>
-                    <div className="w-4/6 flex flex-col pl-4 pr-1 " style={{ minHeight: "50%",backgroundColor:"#363940"}}>
+                    <div className="w-4/6 flex flex-col pl-4 pr-1 " style={{ minHeight: "50%",backgroundColor:"#363940",height:"726px"}}>
 
                         <div className="overflow-y-auto order-first" id="style-1" style={{ height:"622px", marginTop: "17" }}>
                             {this.state.messages.map(msg => {

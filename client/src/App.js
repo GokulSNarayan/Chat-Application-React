@@ -44,7 +44,10 @@ class App extends Component {
     return (
       <Fragment >
           <Topnav />
-        <div className="" style={{height:"94vh", backgroundColor:"#363940"}}>
+        <div className="flex justify-center" style={{height:"94vh", backgroundColor:"#363940",
+        backgroundImage:"url(/watercolor-wallpaper-hd-1280x768-281709.jpg)",
+        backgroundSize:"100% 100%", 
+      }}>
           
             
             <Switch>

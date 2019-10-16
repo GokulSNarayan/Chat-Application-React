@@ -3,7 +3,8 @@ import { Button, Form, FormGroup, Label, Input, } from 'reactstrap';
 import logo from '../logo.svg';
 import {API_URL} from '../constants/defaultValues';
 import axios from 'axios';
-
+import { NavLink } from 'react-router-dom';
+// import image from '../images/53893.jpg';
 
 
 const Login = (props) => {
@@ -23,9 +24,9 @@ const Login = (props) => {
 
     // console.log("email=====>>",email)
     return (
-        <div className="flex flex-wrap flex-col items-center justify-start">
+        <div className="flex"  >
         <Fragment>
-        <div>
+        {/* <div>
         
             <img src={logo} className="App-logo" alt="logo" />
             <a
@@ -35,25 +36,26 @@ const Login = (props) => {
                 rel="noopener noreferrer"
             >
             </a>
-        </div>
-      
-        <Form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        </div> */}
+        <Form className="shadow-md rounded px-8 pt-6 pb-8 mb-4 self-center" style={{backgroundColor:"#363940",height:"45vh"}}>
+            <div className="text-center text-white text-xl font-light"><h2>Welcome Back !</h2></div>
             <FormGroup className="mb-4">
-                <Label className= "block text-gray-700 text-sm font-bold mb-2" for="emailField">Email</Label>
-                <Input className= "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="email" name="email" id="emailField" placeholder="gekko@gmail.com" 
+                <Label className= "block text-sm font-bold mb-2" for="emailField" style={{color:"#8D9196"}}>Email</Label>
+                <Input style={{backgroundColor:"#303338"}} className= "shadow appearance-none border border-black rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="email" name="email" id="emailField"  
                 onChange={e => setEmail(e.target.value)}
                 value={email}/>
             </FormGroup>
             <FormGroup className="mb-4">
-                <Label className="block text-gray-700 text-sm font-bold mb-2" for="passwordField">Password</Label>
-                <Input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="password" name="password" id="passwordField" placeholder="********" 
+                <Label className="block text-sm font-bold mb-2" for="passwordField" style={{color:"#8D9196"}}>Password</Label>
+                <Input style={{backgroundColor:"#303338"}} className="shadow appearance-none border border-black rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="password" name="password" id="passwordField"  
                 onChange={e => setPassword(e.target.value)}
                 value={password}/>
             </FormGroup>
             <div class="flex items-center justify-between">
-            <Button className="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            <Button className="bg-teal-500 hover:bg-teal-700 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             onClick={handleLogin}>Login</Button>
             </div>
+            <div className="py-2 flex flew-wrap justify-start"><span className="px-1" style={{color:"#6B6F76"}}><h4>Need an account ?</h4></span> <span className="text-teal-600"><NavLink to='/register'>Register</NavLink></span></div>
         </Form>
         </Fragment>
         </div>
