@@ -9,6 +9,25 @@ import register from './components/register';
 import login from './components/login';
 import ChatRoom from './containers/ChatRoom';
 
+
+
+const AuthRoute = ({ component: Component, authUser, ...rest }) => (
+  <Route
+  {...rest} 
+  render={props => 
+  authUser ? (
+    <Component {...props} />
+  ) :  (
+    <Redirect
+      to={{
+        pathname: "/login",
+        state: { from: props.location }
+      }}
+    />
+  )}
+  />
+  );
+
 class App extends Component {
   constructor(props) {
 
@@ -16,7 +35,8 @@ class App extends Component {
     this.state = {
       game: {},
       message: '',
-      data: ''
+      data: '',
+      token: "" 
 
     }
   }
@@ -33,6 +53,8 @@ class App extends Component {
 
 
   componentDidMount() {
+    const token = localStorage.getItem('token')
+    this.setState({token:token})
     // let newClient = client.connect('http://localhost:4000')
     // console.log("client", newClient)
     // this.setState({ game: newClient });
@@ -43,20 +65,23 @@ class App extends Component {
   render() {
     return (
       <Fragment >
-          <Topnav />
-        <div className="flex justify-center" style={{height:"94vh", backgroundColor:"#363940",
+          
+        <div className="flex justify-center" style={{height:"100vh", backgroundColor:"#363940",
         backgroundImage:"url(/watercolor-wallpaper-hd-1280x768-281709.jpg)",
         backgroundSize:"100% 100%", 
       }}>
           
             
+              {/* {this.state.token == "" ?} */}
+              {/* <AuthRoute path={"/chatRoom"} authUser={this.state.token} component={ChatRoom} /> */}
             <Switch>
               <Route path={'/login'} component={login} />
               <Route path={'/register'} component={register} />
-              <Route path={'/chatRoom'} component={ChatRoom} />
+              <Route path={"/chatRoom"} component={ChatRoom} />
               <Redirect to='/login' from="/" />
             </Switch>
             
+              
           
         </div>
       </Fragment>

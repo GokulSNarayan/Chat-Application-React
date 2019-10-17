@@ -4,6 +4,7 @@ import Chat from '../components/chatMessage';
 import RightMenu from '../components/RightMenu';
 import LeftMenu from '../components/LeftMenu';
 import Input from '../components/inputMessage';
+import Topnav from '../containers/Topnav';
 import { SOCKET_URL, API_URL } from '../constants/defaultValues';
 import axios from 'axios';
 const headers = {
@@ -16,16 +17,16 @@ class ChatRoom extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            users:[],
-            channels:[{
-                id:1,
-                channel_name:"Dev Support"
+            users: [],
+            channels: [{
+                id: 1,
+                channel_name: "Dev Support"
             },
             {
-                id:2,
-                channel_name:"Android"
+                id: 2,
+                channel_name: "Android"
             }],
-            user_name:"",
+            user_name: "",
             message: '',
             messages: [{
                 id: 1,
@@ -78,41 +79,43 @@ class ChatRoom extends React.Component {
 
 
     componentDidMount() {
-        var user_name;
-        axios.post(`${API_URL}/users/getUserDetails`,{}, {headers} )
-            .then(res => {
-                if(res.data.status==1){
+        
 
-                    console.log("Result=======>>>", res)
-                    user_name =  res.data.result.user_name
-                    this.setState({user_name:user_name})
-                    socket.emit('new user',user_name)
-                }
-                else{
-                    alert("No data")
-                }
-            })
-            
-                
-                    
-                
-               
+
+this.getUserData()
+
+
         socket.on('new message', (data) => {
             this.updateHandler(data)
             this.scrollToBottom();
-            console.log("dataaaaa",data)
+            console.log("dataaaaa", data)
         })
 
         socket.on('get users', (data) => {
-            this.setState({users:data})
-            console.log("users===>>",data)
+            this.setState({ users: data })
+            console.log("users===>>", data)
         })
 
         this.scrollToBottom();
 
     }
 
+getUserData = () => {
+    var user_name;
+        axios.post(`${API_URL}/users/getUserDetails`, {}, { headers })
+            .then(res => {
+                if (res.data.status == 1) {
 
+                    // console.log("Result=======>>>", res)
+                    user_name = res.data.result.user_name
+                    this.setState({ user_name: user_name })
+                    socket.emit('new user', user_name)
+                }
+                else {
+                    alert("No data")
+                }
+            })
+}
 
     componentWillUnmount() {
         socket.on('disconnect', function () { });
@@ -128,7 +131,7 @@ class ChatRoom extends React.Component {
 
     submitMessage = () => {
         socket.emit("send message", this.state.message)
-        this.setState({message:""})
+        this.setState({ message: "" })
     }
 
     onMessageTypeHandler = (event) => {
@@ -139,50 +142,56 @@ class ChatRoom extends React.Component {
 
     scrollToBottom = () => {
         this.el.scrollIntoView({ behavior: 'auto' });
-      }
+    }
     render() {
 
         // console.log("messagges",this.state.messages)
         return (
-            <div className="flex flex-wrap flex-row items-start justify-start " style={{ height:"700px", backgroundColor:"#363940", display:"contents"}} >
 
-                <Fragment>
-                    <div className="flex w-1/6 items-start h-full shadow-md border-r-2 " style={{ height:"726px",borderColor:"#40444B",backgroundColor:"#2F3136"}} >
-                        <LeftMenu 
-                        channels={this.state.channels} />
+            <Fragment>
+                
+                <div className="flex flex-wrap flex-row items-start justify-start " style={{ height: "100vh", backgroundColor: "#363940", display: "contents" }} >
+
+
+                    <div className="flex w-1/6 items-start h-full shadow-md border-r-2 " style={{ borderColor: "#40444B", backgroundColor: "#2F3136" }} >
+                        <LeftMenu
+                            channels={this.state.channels} />
                     </div>
-                    <div className="w-4/6 flex flex-col pl-4 pr-1 " style={{ minHeight: "50%",backgroundColor:"#363940",height:"726px"}}>
-
-                        <div className="overflow-y-auto order-first" id="style-1" style={{ height:"622px", marginTop: "17" }}>
+                    <div className="w-4/6 flex flex-col pl-4 pr-1 " style={{ minHeight: "50%", backgroundColor: "#363940", }}>
+                        <div className="flex order-1">
+                        <Topnav />
+                        </div>
+                        <div className="overflow-y-auto order-2" id="style-1" style={{ height: "88vh", marginTop: "17" }}>
                             {this.state.messages.map(msg => {
                                 return (
-                                    <div ref={el => { this.el = el;}}>
-                                    <Chat
-                                        id={msg.id}
-                                        key={msg.id}
-                                        user_name={msg.user_name}
-                                        message={msg.message}
-                                         />
-                                         </div>
+                                    <div ref={el => { this.el = el; }}>
+                                        <Chat
+                                            id={msg.id}
+                                            key={msg.id}
+                                            user_name={msg.user_name}
+                                            message={msg.message}
+                                        />
+                                    </div>
                                 )
                             })}
                         </div>
-                        <div className="flex items-stretch py-2 pt-4 px-4 order-last align-center pt-2 border-t" style={{borderColor:"#40444B"}}>
+                        <div className="flex items-stretch py-2 pt-4 px-4 order-3 align-center pt-2 border-t" style={{ borderColor: "#40444B" }}>
                             <Input
                                 submit={this.submitMessage}
                                 changed={this.onMessageTypeHandler}
                                 value={this.state.message} />
                         </div>
                     </div>
-                    <div className="flex w-1/6 items-start h-full shadow-md border-r-2 " style={{ height:"726px",borderColor:"#40444B",backgroundColor:"#2F3136"}} >
-                        
-                        <RightMenu 
-                        users={this.state.users} />
+                    <div className="flex w-1/6 items-start h-full shadow-md border-r-2 " style={{ borderColor: "#40444B", backgroundColor: "#2F3136" }} >
+
+                        <RightMenu
+                            users={this.state.users} />
                     </div>
 
-                </Fragment>
 
-            </div>
+                </div>
+            </Fragment>
+
         )
     }
 }

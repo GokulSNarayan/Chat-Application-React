@@ -6,23 +6,22 @@ import { NavLink } from 'react-router-dom';
 class Topnav extends Component {
     render() {
         return (
-            <Nav className="flex items-center py-2 px-2 justify-start text-white shadow-lg border-b font-medium" style={{backgroundColor:"#363940",borderColor:"#2B2D31"}}>
+            <Nav className="flex  w-full items-center py-2 px-2 justify-start  shadow-lg border-b font-medium" style={{ backgroundColor: "#363940", borderColor: "#2B2D31",color:"#8E9297" }}>
 
-                
-                    <NavItem className="px-2 block border-b-2 border-transparent hover:border-white ">
-                        <NavLink  className="pb-2" to='/login'>Login</NavLink>
+
+                        <svg height="15px" width="15px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path fill="#B9BBBE" d="M64.3 490h58.4l33.9-137.7h122.3L245.4 490h58.4l33.9-137.7h119.9v-48.2h-108.2l29.2-117.3h79v-48.2H390.2L424.1 0H365.3l-33.9 138.7H208.8L242.7 0h-58.4l-33.9 138.7H32.4v48.2h106.3l-28.8 117.3h-77.5v48.2h65.8L64.3 490zM197.1 186.8h122.6l-29.2 117.3H168.3L197.1 186.8z" /></svg>
+                <NavItem className="px-2 block border-b-2 border-transparent hover:border-white ">
+                     
+
+                        
+                            <NavLink className="pb-2" to='/login'>Android</NavLink>
                     </NavItem>
-                    <NavItem className="px-2 block border-b-2 border-transparent hover:border-white  ">
-                        <NavLink className="pb-2" to='/register'>Register</NavLink>
-                    </NavItem>
-                    <NavItem className="px-2 block border-b-2 border-transparent hover:border-white  ">
-                        <NavLink className="pb-2" to='/chatRoom'>Chat Room</NavLink>
-                    </NavItem>
+                   
 
                 
             </Nav>
-        )
-    }
-}
-
+                    )
+                }
+            }
+            
 export default Topnav;

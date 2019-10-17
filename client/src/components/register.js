@@ -17,10 +17,10 @@ const Register = (props) => {
 
     return (
         <div className="flex flex-wrap flex-col items-center justify-center" >
-        <Form className="shadow-md rounded px-8 pt-6 pb-8 mb-4" style={{backgroundColor:"#363940",}}>
-        <div className="text-center text-white text-xl font-light"><h2>Create an account</h2></div>
+        <Form className="shadow-md rounded p-12" style={{backgroundColor:"#363940",}}>
+        <div className="text-center text-white text-2xl pb-4 font-light">Create an account</div>
             <FormGroup className="mb-4">
-                <Label className= "block text-gray-700 text-sm font-bold mb-2" style={{color:"#8D9196"}} for="userNameField">User Name</Label>
+                <Label className= "block text-gray-700 text-sm font-bold mb-2 " style={{color:"#8D9196"}} for="userNameField">User Name</Label>
                 <Input style={{backgroundColor:"#303338"}} className= "shadow appearance-none border border-black rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  type="text" name="user_name" id="userNameField"       
                   onChange={e => setUserName(e.target.value)}
                 value={user_name}/>
@@ -41,7 +41,7 @@ const Register = (props) => {
             <Button className="bg-teal-500 hover:bg-teal-700 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             onClick={handleRegister}>Register</Button>
             </div>
-            <div className="py-2 flex flew-wrap justify-start"><span className="text-teal-600"><NavLink to='/login'>Already have an account ?</NavLink> </span></div>
+            <div className="pt-2 flex flew-wrap justify-start"><span className="text-teal-600"><NavLink to='/login'>Already have an account ?</NavLink> </span></div>
         </Form>
         </div>
     )
