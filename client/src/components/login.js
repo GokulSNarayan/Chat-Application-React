@@ -14,7 +14,7 @@ const Login = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-console.log("props at login",props)
+// console.log("props at login",props)
    const handleLogin = () => {
         // axios.post(`${API_URL}/users/login`,{email,password})
         // .then(res => {
@@ -22,7 +22,7 @@ console.log("props at login",props)
         //     let {token} = res.data
         //     localStorage.setItem('token',token)
         // })
-        props.loginUser("Gekko", props.history )
+        props.loginUser({email,password}, props.history )
     }
 
 
@@ -55,7 +55,7 @@ console.log("props at login",props)
                 onChange={e => setPassword(e.target.value)}
                 value={password}/>
             </FormGroup>
-            <div class="flex items-center justify-between">
+            <div className="flex items-center justify-between">
             <Button className="bg-teal-500 hover:bg-teal-700 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             onClick={handleLogin}>Login</Button>
             </div>

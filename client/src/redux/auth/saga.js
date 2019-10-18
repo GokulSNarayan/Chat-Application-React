@@ -20,7 +20,8 @@ registerUserSuccess
 
 
 function* loginWithEmailPassword({payload}){
-    console.log("Saga working")
+    const {email,password} = payload.user
+    console.log("Saga working",payload.user)
 } 
 
 export function* watchLoginUser(){
