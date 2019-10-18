@@ -4,6 +4,9 @@ import logo from '../logo.svg';
 import {API_URL} from '../constants/defaultValues';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {loginUser} from '../redux/actions';
+
 // import image from '../images/53893.jpg';
 
 
@@ -11,14 +14,15 @@ const Login = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-
+console.log("props at login",props)
    const handleLogin = () => {
-        axios.post(`${API_URL}/users/login`,{email,password})
-        .then(res => {
-            console.log("res======>>>",res)
-            let {token} = res.data
-            localStorage.setItem('token',token)
-        })
+        // axios.post(`${API_URL}/users/login`,{email,password})
+        // .then(res => {
+        //     console.log("res======>>>",res)
+        //     let {token} = res.data
+        //     localStorage.setItem('token',token)
+        // })
+        props.loginUser("Gekko", props.history )
     }
 
 
@@ -63,4 +67,16 @@ const Login = (props) => {
     )
 
 };
-export default Login;
+
+const mapStateToProps = ({authUser}) => {
+    const {user, loading} = authUser;
+    return {user, loading};
+};
+
+
+export default connect(
+    mapStateToProps,
+    {
+        loginUser
+    }
+)(Login);
