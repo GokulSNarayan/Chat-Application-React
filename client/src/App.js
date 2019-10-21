@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 // import './App.css';
 import './tailwind.css'
 // import client from 'socket.io-client';
-import Topnav from './containers/Topnav';
+import Topnav from './components/Topnav';
 import register from './components/register';
 import login from './components/login';
 import ChatRoom from './containers/ChatRoom';
+import { connect } from 'react-redux';
 
 
 
@@ -62,6 +63,7 @@ class App extends Component {
     // })
   }
   render() {
+    const {user} = this.props
     return (
       <Fragment >
 
@@ -76,14 +78,15 @@ class App extends Component {
           {/* <AuthRoute path={"/chatRoom"} authUser={this.state.token} component={ChatRoom} /> */}
           <Router>
             <Switch>
-              <Redirect exact from="/" to='/login'  />
+              <AuthRoute path="/chatRoom" authUser={user} component={ChatRoom} />
               <Route path={'/login'} component={login} />
               <Route path={'/register'} component={register} />
-              <Route path={"/chatRoom"} component={ChatRoom} />
+              <Redirect exact from="/" to='/chatRoom' />
             </Switch>
           </Router>
 
 
+              {/* <Route path={"/chatRoom"} component={} /> */}
 
         </div>
       </Fragment>
@@ -92,4 +95,15 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = ({ authUser }) => {
+  const { user, loading } = authUser;
+  return { user, loading };
+};
+
+
+export default connect(
+  mapStateToProps,
+  {
+
+  }
+)(App);

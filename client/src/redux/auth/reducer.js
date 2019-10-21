@@ -7,7 +7,7 @@ import {
 } from '../actions';
 
 const INIT_STATE = {
-    user: localStorage.getItem('token') || "",
+    user: localStorage.getItem('token'),
     loading: false
 }
 
@@ -16,6 +16,7 @@ export default (state = INIT_STATE, action) => {
         case LOGIN_USER:
             return { ...state, loading: true };
         case LOGIN_USER_SUCCESS:
+            // console.log("Login Success")
             return { ...state, loading: false, user: action.payload };
         case LOGOUT_USER:
             return { ...state, user: null };

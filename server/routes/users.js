@@ -90,7 +90,7 @@ router.post('/login', (req, res) => {
   if (input.email != '' && input.password != '') {
     userModel.findOne({ email: input.email })
       .then((result) => {
-        console.log("Result", result)
+        // console.log("Result", result)
         let passHash = result.password
         bcrypt.compare(input.password, passHash)
           .then((isMatch) => {
