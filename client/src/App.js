@@ -2,12 +2,13 @@ import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 // import './App.css';
 import './tailwind.css'
+import 'react-redux-toastr/src/styles/index.scss'
 // import client from 'socket.io-client';
-import Topnav from './components/Topnav';
 import register from './components/register';
 import login from './components/login';
 import ChatRoom from './containers/ChatRoom';
 import { connect } from 'react-redux';
+import ReduxToastr from 'react-redux-toastr'
 
 
 
@@ -63,7 +64,7 @@ class App extends Component {
     // })
   }
   render() {
-    const {user} = this.props
+    const { token } = this.props
     return (
       <Fragment >
 
@@ -73,12 +74,16 @@ class App extends Component {
           backgroundSize: "100% 100%",
         }}>
 
-
+          <ReduxToastr
+            timeOut={3000}
+            newestOnTop={false}
+            position="top-center"
+            />
           {/* {this.state.token == "" ?} */}
           {/* <AuthRoute path={"/chatRoom"} authUser={this.state.token} component={ChatRoom} /> */}
           <Router>
             <Switch>
-              <AuthRoute path="/chatRoom" authUser={user} component={ChatRoom} />
+              <AuthRoute path="/chatRoom" authUser={token} component={ChatRoom} />
               <Route path={'/login'} component={login} />
               <Route path={'/register'} component={register} />
               <Redirect exact from="/" to='/chatRoom' />
@@ -86,7 +91,7 @@ class App extends Component {
           </Router>
 
 
-              {/* <Route path={"/chatRoom"} component={} /> */}
+          {/* <Route path={"/chatRoom"} component={} /> */}
 
         </div>
       </Fragment>
@@ -96,8 +101,8 @@ class App extends Component {
 }
 
 const mapStateToProps = ({ authUser }) => {
-  const { user, loading } = authUser;
-  return { user, loading };
+  const { user, loading, token } = authUser;
+  return { user, loading, token };
 };
 
 
