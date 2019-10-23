@@ -15,7 +15,6 @@ io.on("connection", (socket) => {
   connections.push(socket);
 // console.log("connections===>>",connections)
   socket.on('send message', function(msg){
-    let data = [socket.id, msg];
     let newData = {
       id: socket.id,
       user_name: socket.username,
@@ -36,8 +35,16 @@ io.on("connection", (socket) => {
     }
     
     })
+
+
+    socket.on('user left',(id,username)=>{
+      console.log("data",id,username)
+      users.splice(users.findIndex(x => x.id == id),1);
+        updatedUserName();
+        // connections.splice(connections.indexOf(socket),1);
+    })
         function updatedUserName(){
-          console.log("socket.id---",socket.id);
+          console.log("users",users);
                 io.emit('get users',users);
             }
 

@@ -59,19 +59,16 @@ function* loginWithEmailPassword({ payload }) {
     }
 }
 
-function* logout(payload) {
-    const { history } = payload;
+function* logout({payload}) {
+    console.log("payload at logout",payload)
+    const { history, user_name,id } = payload;
     yield localStorage.removeItem('token');
+    socket.emit('user left',id,user_name)
     history.push('/')
 }
 
-function* getUserData() {
 
-}
 
-export function* watchGetUserData() {
-    yield takeEvery(LOGIN_USER, getUserData);
-}
 
 export function* watchLoginUser() {
     yield takeEvery(LOGIN_USER, loginWithEmailPassword);

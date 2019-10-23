@@ -8,6 +8,7 @@ import MainNav from '../components/MainNav';
 import { connect } from 'react-redux';
 import { SOCKET_URL, API_URL } from '../constants/defaultValues';
 import axios from 'axios';
+import _ from 'lodash';
 const headers = {
     'Content-Type': 'application/json',
     'Authorization': localStorage.getItem('token')
@@ -84,20 +85,20 @@ class ChatRoom extends React.Component {
 
     componentDidMount() {
         // this.getUserData();
-        // this.props.socket.on('new message', (data) => {
-        //     this.updateHandler(data)
-        //     this.scrollToBottom();
-        //     console.log("dataaaaa", data)
-        // })
+        this.props.socket.on('new message', (data) => {
+            this.updateHandler(data)
+            this.scrollToBottom();
+            console.log("dataaaaa", data)
+        })
 
-        // this.props.socket.on('get users', (data) => {
+        this.props.socket.on('get users', (data) => {
 
-        //     let newData =[...this.state.users,data[0]]
-        //     this.setState({ users: newData })
-        //     console.log("users===>>", newData)
-        // })
+           let newData =  _.unionBy(data,this.state.users,'id');
+            this.setState({ users: newData })
+            console.log("users===>>", newData)
+        })
 
-        this.scrollToBottom();
+        // this.scrollToBottom();
 
     }
 
@@ -119,7 +120,7 @@ class ChatRoom extends React.Component {
     }
 
     componentWillUnmount() {
-        // this.props.socket.on('disconnect', function () { });
+        this.props.socket.on('disconnect', function () { });
     }
 
 
@@ -131,9 +132,9 @@ class ChatRoom extends React.Component {
     }
 
     submitMessage = () => {
-        // this.props.socket.emit("send message", this.state.message)
-        // console.log("Socket id",this.props.socket)
-        // this.setState({ message: "" })
+        this.props.socket.emit("send message", this.state.message)
+        console.log("Socket id",this.props.socket)
+        this.setState({ message: "" })
     }
 
     onMessageTypeHandler = (event) => {
@@ -148,6 +149,7 @@ class ChatRoom extends React.Component {
     render() {
 
         // console.log("props",this.props)
+        const { user } = this.props
         return (
             <Fragment>
                 <div className="flex flex-wrap flex-row items-start justify-start " style={{ height: "100vh", backgroundColor: "#363940", display: "contents" }} >
@@ -158,7 +160,9 @@ class ChatRoom extends React.Component {
                     <div className="w-5/6 flex flex-col flex-wrap" style={{ minHeight: "50%", backgroundColor: "#363940", }}>
                         <div className="flex w-full" style={{ backgroundColor: "#363940" }}>
                             <MainNav
-                                heading="general" />
+                                heading="general"
+                                user_name={user.user_name}
+                                history={this.props.history} />
                         </div>
                         <div className="flex justify-end" style={{ height: "94vh" }}>
                             <div className="w-4/5 flex flex-col">

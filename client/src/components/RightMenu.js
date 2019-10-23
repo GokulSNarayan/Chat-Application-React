@@ -2,7 +2,7 @@ import React from 'react';
 import {NavItem,Nav } from 'reactstrap';
 // import { render } from 'timeago.js';
 import Contacts from './contacts';
-import Topnav from '../components/Topnav';
+
 
 
 const RightMenu = (props) => {
@@ -14,7 +14,7 @@ const RightMenu = (props) => {
             <div className="px-2">
             <div>
             <div className="py-2" style={{color:"#8E9297"}}>ONLINE</div>
-                {props.users.map(user => {
+                {props.users ? (props.users.map(user => {
                     return(
                         <Contacts
                         key={user.id}
@@ -22,7 +22,7 @@ const RightMenu = (props) => {
                         name={user.name}
                         />
                     )
-                })}
+                })) : null}
             </div>
             </div>
         </div>
