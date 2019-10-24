@@ -66,26 +66,11 @@ class ChatRoom extends React.Component {
        })
 
 
-        // this.scrollToBottom();
+        this.scrollToBottom();
 
     }
 
-    getUserData = () => {
-        var user_name;
-        axios.post(`${API_URL}/users/getUserDetails`, {}, { headers })
-            .then(res => {
-                if (res.data.status === 1) {
 
-                    // console.log("Result=======>>>", res)
-                    user_name = res.data.result.user_name
-                    this.setState({ user_name: user_name })
-                    this.props.socket.emit('new user', user_name)
-                }
-                else {
-                    alert("No data")
-                }
-            })
-    }
 
     componentWillUnmount() {
         this.props.socket.on('disconnect', function () { });
@@ -96,7 +81,7 @@ class ChatRoom extends React.Component {
 
         let newMessages = [...this.state.messages]
         newMessages.push({...data,id:newMessages.length +1})
-        console.log("New message===>>",newMessages)
+        // console.log("New message===>>",newMessages)
         this.setState({ messages: newMessages })
     }
 
@@ -104,6 +89,14 @@ class ChatRoom extends React.Component {
         this.props.socket.emit("send message", this.state.message)
         console.log("Socket id",this.props.socket)
         this.setState({ message: "" })
+    }
+
+    onKeyPressHandler= (event) => {
+        // console.log(event.key)
+        if(event.key == 'Enter' && this.state.message != ''){
+            this.submitMessage();
+        } 
+        
     }
 
     onMessageTypeHandler = (event) => {
@@ -151,7 +144,7 @@ class ChatRoom extends React.Component {
                                 </div>
                                 <div className="flex items-stretch py-2 pt-4 px-4 order-3 align-center pt-2 border-t" style={{ borderColor: "#40444B" }}>
                                     <Input
-                                        submit={this.submitMessage}
+                                        keyPress={this.onKeyPressHandler}
                                         changed={this.onMessageTypeHandler}
                                         value={this.state.message} />
                                 </div>

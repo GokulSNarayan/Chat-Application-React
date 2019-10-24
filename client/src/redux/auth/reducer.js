@@ -12,8 +12,8 @@ import {
 const INIT_STATE = {
     token: localStorage.getItem('token'),
     loading: false,
-    user: JSON.parse(localStorage.getItem('user')),
-    socket:JSON.parse(localStorage.getItem('socket'))
+    user: {},
+    socket:{}
 }
 
 export default (state = INIT_STATE, action) => {
@@ -26,10 +26,9 @@ export default (state = INIT_STATE, action) => {
             return { ...state, loading: false };
         case LOGOUT_USER:
             return { ...state, token: null };
-        case REGISTER_USER:
-            return { ...state, loading: true };
         case REGISTER_USER_SUCCESS:
-            return { ...state, loading: false, user: action.payload };
+            console.log("Register suceess reducer");
+            return { ...state, user: action.payload };
         case SET_USER_DATA:
             return { ...state, user: action.payload }
         case SET_SOCKET_DATA:

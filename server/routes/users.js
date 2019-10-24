@@ -41,7 +41,8 @@ const userModel = require('../models/user');
 //create
 router.post('/register', (req, res) => {
   var input = req.body;
-  if (input.email != '' && input.password != '' && input.user_name != '') {
+  // console.log("Data==========>>>",input)
+  if (input && input.email != '' && input.email && input.password != '' && input.password && input.user_name != '' && input.user_name) {
     userModel.findOne({ email: input.email })
       .then((result, err) => {
         if (result) {

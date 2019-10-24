@@ -46,13 +46,13 @@ const Login = (props) => {
                     <div className="text-center text-white text-xl sm:text-lg font-light"><h2>Welcome Back !</h2></div>
                     <FormGroup className="mb-4">
                         <Label className="block text-sm font-bold mb-2" for="emailField" style={{ color: "#8D9196" }}>Email</Label>
-                        <Input style={{ backgroundColor: "#303338" }} className="shadow appearance-none border border-black rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="email" name="email" id="emailField"
+                        <Input style={{ backgroundColor: "#303338" }} autoComplete="off" className="font-normal text-white shadow appearance-none border border-black rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline" type="email" name="email" id="emailField"
                             onChange={e => setEmail(e.target.value)}
                             value={email} />
                     </FormGroup>
                     <FormGroup className="mb-4">
                         <Label className="block text-sm font-bold mb-2" for="passwordField" style={{ color: "#8D9196" }}>Password</Label>
-                        <Input style={{ backgroundColor: "#303338" }} className="shadow appearance-none border border-black rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="password" name="password" id="passwordField"
+                        <Input style={{ backgroundColor: "#303338" }} className="font-normal text-white shadow appearance-none border border-black rounded w-full py-2 px-3  mb-3 leading-tight focus:outline-none focus:shadow-outline" type="password" name="password" id="passwordField"
                             onChange={e => setPassword(e.target.value)}
                             value={password} />
                     </FormGroup>
