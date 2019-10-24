@@ -12,8 +12,8 @@ import {
 const INIT_STATE = {
     token: localStorage.getItem('token'),
     loading: false,
-    user: {},
-    socket:{}
+    user: JSON.parse(localStorage.getItem('user')),
+    socket:JSON.parse(localStorage.getItem('socket'))
 }
 
 export default (state = INIT_STATE, action) => {

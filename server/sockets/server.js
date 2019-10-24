@@ -9,14 +9,14 @@ var sockets = [];
 // })
 // res.redirect(' http://localhost:4000');
 
-var players = [];
+
 io.on("connection", (socket) => {
 
   connections.push(socket);
 // console.log("connections===>>",connections)
   socket.on('send message', function(msg){
     let newData = {
-      id: socket.id,
+      socket_id: socket.id,
       user_name: socket.username,
       message: msg
     }

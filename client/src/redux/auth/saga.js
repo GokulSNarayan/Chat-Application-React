@@ -19,8 +19,11 @@ const headers = {
     'Authorization': localStorage.getItem('token')
 }
 
-const socket = io(`${SOCKET_URL}`);
+var socket = {};
     
+const getSocket = (url) => {
+    return io(url)
+};
 
 
 function* loginWithEmailPassword({ payload }) {
@@ -32,7 +35,7 @@ function* loginWithEmailPassword({ payload }) {
             console.log("data========>>>", result)
             localStorage.setItem('token', result.data.token);
             try {
-            // let socket = getSocket();
+            socket = getSocket(SOCKET_URL);
             console.log("Socket")
             yield put(setSocketData(socket))
             let userData = yield axios.post(`${API_URL}/users/getUserDetails`, {}, {headers:{

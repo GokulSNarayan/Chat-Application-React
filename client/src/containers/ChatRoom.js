@@ -19,10 +19,7 @@ class ChatRoom extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            users: [{
-                id: "asdad",
-                name: "Vivek"
-            }],
+            users: [],
             channels: [{
                 id: 1,
                 channel_name: "Dev Support"
@@ -47,37 +44,8 @@ class ChatRoom extends React.Component {
                 id: 3,
                 user_name: 'Vineeth',
                 message: "Whats up"
-            },
-            {
-                id: 4,
-                user_name: 'Vineeth',
-                message: "Whats up"
-            },
-            {
-                id: 5,
-                user_name: 'Vineeth',
-                message: "Whats up"
-            },
-            {
-                id: 6,
-                user_name: 'Vineeth',
-                message: "Whats up"
-            },
-            {
-                id: 7,
-                user_name: 'Vineeth',
-                message: "Whats up"
-            },
-            {
-                id: 8,
-                user_name: 'Vineeth',
-                message: "Whats up"
-            },
-            {
-                id: 9,
-                user_name: 'Vineeth',
-                message: "Whats up"
-            },],
+            }
+           ],
 
         }
     }
@@ -92,11 +60,11 @@ class ChatRoom extends React.Component {
         })
 
         this.props.socket.on('get users', (data) => {
+            
+           this.setState({ users: data })
+           console.log("users===>>", data)
+       })
 
-           let newData =  _.unionBy(data,this.state.users,'id');
-            this.setState({ users: newData })
-            console.log("users===>>", newData)
-        })
 
         // this.scrollToBottom();
 
@@ -127,7 +95,8 @@ class ChatRoom extends React.Component {
     updateHandler = (data) => {
 
         let newMessages = [...this.state.messages]
-        newMessages.push(data)
+        newMessages.push({...data,id:newMessages.length +1})
+        console.log("New message===>>",newMessages)
         this.setState({ messages: newMessages })
     }
 
