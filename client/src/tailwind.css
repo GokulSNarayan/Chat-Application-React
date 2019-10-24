@@ -8369,6 +8369,11 @@ video {
   color: #61dafb;
 }
 
+.swal-modal{
+  position: absolute;
+  left: 30vw;
+}
+
 .scrollbar
 {
   margin-left: 30px;

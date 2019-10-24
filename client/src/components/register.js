@@ -23,9 +23,15 @@ const Register = (props) => {
         })
         .then(result => {
             if(result.data.status==1){
-                swal("Registration Complete !",result.data.message, "success");
+                swal("Registration Complete !",result.data.message, "success",{
+                    buttons:false,
+                    timer:2000
+                });
             } else {
-                swal("Registration Failed!",result.data.message, "error");
+                swal("Registration Failed!",result.data.message, "error",{
+                    buttons:false,
+                    timer:2000
+                });
             }
         })
         // props.registerUser({email,password,user_name},props.history)
