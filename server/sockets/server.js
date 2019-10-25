@@ -4,10 +4,6 @@ var io = require('socket.io')(http);
 var users = [];
 var connections = [];
 var sockets = [];
-// app.get('/', (req, res) => {
-//   res.sendFile('index.html', {root: __dirname })
-// })
-// res.redirect(' http://localhost:4000');
 
 
 io.on("connection", (socket) => {
@@ -48,8 +44,8 @@ io.on("connection", (socket) => {
                 io.emit('get users',users);
             }
 
-  socket.on('disconnect', () => {
-    users.splice(users.indexOf(socket.username),1);
+  socket.on('disconnect', (socket) => {
+    users.splice(users.findIndex(x => x.id == socket.id),1);
         updatedUserName();
         connections.splice(connections.indexOf(socket),1);
     console.log(socket.id, 'disconnected');

@@ -48,29 +48,31 @@ class ChatRoom extends React.Component {
 
 
     componentDidMount() {
-        if (this.props.socket) {
+        if (Object.keys(this.props.socket).length === 0) {
+            // console.log("From componentDidMount")
+            swal("Socket Connection Lost!", "Please Login Again", "error", {
+                buttons: false,
+                timer: 2000
+            });
+            
+        } else {
+            // console.log("From componentDidMount else",this.props)
             try {
                 this.props.socket.on('new message', (data) => {
                     this.updateHandler(data)
                     this.scrollToBottom();
-                    console.log("dataaaaa", data)
+                    // console.log("dataaaaa", data)
                 })
 
                 this.props.socket.on('get users', (data) => {
 
                     this.setState({ users: data })
-                    console.log("users===>>", data)
+                    // console.log("users===>>", data)
                 })
             }
             catch (e) {
                 console.log("error", e)
             }
-        } else {
-            console.log("From componentDidMount")
-            swal("Socket Connection Lost!", "Please Login Again", "error", {
-                buttons: false,
-                timer: 2000
-            });
         }
         this.scrollToBottom();
     }
@@ -82,12 +84,15 @@ class ChatRoom extends React.Component {
 
     componentWillUnmount() {
         try {
-            this.props.socket.on('disconnect', function () { });
+            if(Object.keys(this.props.socket).length !== 0){
+                this.props.socket.on('disconnect', function () { });
+            }
         }
         catch (e) {
             console.log("Error At componentWillUnmount", e)
         }
     }
+
 
 
     updateHandler = (data) => {
@@ -102,7 +107,7 @@ class ChatRoom extends React.Component {
         if (this.props.socket) {
             try {
                 this.props.socket.emit("send message", this.state.message)
-                console.log("Socket id", this.props.socket)
+                // console.log("Socket id", this.props.socket)
                 this.setState({ message: "" })
             }
             catch (e) {

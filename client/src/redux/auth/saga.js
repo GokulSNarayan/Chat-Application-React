@@ -29,16 +29,17 @@ const getSocket = (url) => {
 
 
 function* loginWithEmailPassword({ payload }) {
+    
     const { user: { email, password }, history } = payload;
-    console.log("History======>>", payload)
+    // console.log("History======>>", payload)
     try {
         let result = yield axios.post(`${API_URL}/users/login`, { email, password })
         if (result.data.status === 1) {
-            console.log("data========>>>", result)
+            // console.log("data========>>>", result)
             localStorage.setItem('token', result.data.token);
             try {
                 socket = getSocket(SOCKET_URL);
-                console.log("Socket",socket)
+                // console.log("Socket",socket)
                 yield put(setSocketData(socket))
                 let userData = yield axios.post(`${API_URL}/users/getUserDetails`, {}, {
                     headers: {
@@ -47,15 +48,16 @@ function* loginWithEmailPassword({ payload }) {
                     }
                 })
                 let user = userData.data.result;
+                
                 yield put(setUserData(user));
-                // console.log("Userdata",user)
+                
                 socket.emit('new user', user.user_name)
+                yield put(loginUserSuccess(result.data.token));
+                history.push('/');
             }
             catch (err) {
                 console.log("Error while getting user data", err)
             }
-            yield put(loginUserSuccess(result.data.token));
-            history.push('/');
             
         } else {
             yield put(loginUserFailed())
@@ -72,16 +74,24 @@ function* loginWithEmailPassword({ payload }) {
 }
 
 function* logout({ payload }) {
-    console.log("payload at logout", payload)
+    // console.log("payload at logout", payload)
+    try{
     const { history, user_name, id } = payload;
     yield localStorage.removeItem('token');
-    socket.emit('user left', id, user_name)
+    if(Object.keys(socket).length !== 0){
+        socket.emit('user left', id, user_name)
+    }
     history.push('/')
+    }
+    catch(e){
+        console.log("Error at logout saga",e)
+    }
 }
 
+
 function* registerWithEmailPassword({ payload }) {
-    const { user, history } = payload;
-    console.log("handle Register saga", history)
+    const { user, history} = payload;
+    // console.log("handle Register saga", history)
     if (user) {
         try {
             let result = yield axios.post(`${API_URL}/users/register`, {
@@ -89,7 +99,7 @@ function* registerWithEmailPassword({ payload }) {
                 email: user.email,
                 password: user.password
             });
-            console.log("result at register===>>", result);
+            // console.log("result at register===>>", result);
             if (result.data.status === 1) {
                 yield put(registerUser("success"))
                 // history.push('/');
@@ -107,6 +117,7 @@ export function* watchRegisterUser() {
 }
 
 export function* watchLoginUser() {
+    
     yield takeEvery(LOGIN_USER, loginWithEmailPassword);
 }
 

@@ -26,7 +26,6 @@ export default (state = INIT_STATE, action) => {
         case LOGOUT_USER:
             return { ...state, token: null };
         case REGISTER_USER_SUCCESS:
-            console.log("Register suceess reducer");
             return { ...state, user: action.payload };
         case SET_USER_DATA:
             return { ...state, user: action.payload }

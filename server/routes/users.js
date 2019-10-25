@@ -41,7 +41,7 @@ const userModel = require('../models/user');
 //create
 router.post('/register', (req, res) => {
   var input = req.body;
-  // console.log("Data==========>>>",input)
+  // console.log("Data==========>>>",req)
   if (input && input.email != '' && input.email && input.password != '' && input.password && input.user_name != '' && input.user_name) {
     userModel.findOne({ email: input.email })
       .then((result, err) => {
@@ -50,11 +50,11 @@ router.post('/register', (req, res) => {
         }
         bcrypt.genSalt(saltRounds)
           .then((salt, err) => {
-            console.log("Saltttt", salt)
+            // console.log("Saltttt", salt)
             return bcrypt.hash(input.password, salt)
           })
           .then((hash, err) => {
-            console.log("Hashhhhhh", hash)
+            // console.log("Hashhhhhh", hash)
             let user_data = new userModel({
               "email": input.email,
               "password": hash,
@@ -62,7 +62,7 @@ router.post('/register', (req, res) => {
             })
             user_data.save()
               .then((response) => {
-                console.log("User Result : ", response);
+                // console.log("User Result : ", response);
                 res.json({
                   status: 1,
                   message: "User added successfully.",

@@ -1,7 +1,5 @@
-var createError = require('http-errors');
 var express = require('express');
 var http = require('http');
-const http2 = require('http2');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -35,10 +33,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
 
 // error handler
 // app.use(function(err, req, res, next) {
@@ -51,7 +45,7 @@ app.use(function(req, res, next) {
   //   res.render('error');
   // });
   
-  // this is our MongoDB database
+  //MongoDB database
   const dbRoute =
   'mongodb://demo:pwdemo@192.168.10.9:27017/demo';
   
@@ -69,28 +63,12 @@ app.use(function(req, res, next) {
   
   
   
-  
-  
-  
   var port = process.env.PORT || 4000;
-
-
-/**
- * Create HTTP server.
- */
 
 var server = http.createServer(app);
 
-/**
- * Listen on provided port, on all network interfaces.
- */
 
 server.listen(port);
-
-/**
- * Normalize a port into a number, string, or false.
- */
-
 
 
 module.exports = app;

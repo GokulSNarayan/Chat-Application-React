@@ -16,13 +16,14 @@ const Register = (props) => {
     const handleRegister = (values) => {
         // console.log("handle Register",values);
 
-        axios.post(`${API_URL}/users/register`, {values})
+        axios.post(`${API_URL}/users/register`, values)
             .then(result => {
                 if (result.data.status === 1) {
                     swal("Registration Complete !", result.data.message, "success", {
                         buttons: false,
                         timer: 2000
                     });
+                    props.history.push('/login');
                 } else {
                     swal("Registration Failed!", result.data.message, "error", {
                         buttons: false,
