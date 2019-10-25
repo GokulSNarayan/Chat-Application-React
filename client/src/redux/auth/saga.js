@@ -38,7 +38,7 @@ function* loginWithEmailPassword({ payload }) {
             localStorage.setItem('token', result.data.token);
             try {
                 socket = getSocket(SOCKET_URL);
-                console.log("Socket")
+                console.log("Socket",socket)
                 yield put(setSocketData(socket))
                 let userData = yield axios.post(`${API_URL}/users/getUserDetails`, {}, {
                     headers: {
@@ -56,6 +56,7 @@ function* loginWithEmailPassword({ payload }) {
             }
             yield put(loginUserSuccess(result.data.token));
             history.push('/');
+            
         } else {
             yield put(loginUserFailed())
             // toastr.error('Login', 'Invalid credentials');

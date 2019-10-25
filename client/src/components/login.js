@@ -13,8 +13,8 @@ const Login = (props) => {
 
 
     const handleLogin = (values) => {
-        console.log("values",values)
-        // props.loginUser({ email, password }, props.history)
+        // console.log("values",values)
+        props.loginUser(values, props.history)
     }
 
     const handleValidate = (values) => {
@@ -46,7 +46,7 @@ const Login = (props) => {
                     onSubmit={handleLogin}>
                     {({ errors, touched, isValidating }) => (
                         <Form className="shadow-md rounded p-4 lg:p-12 sm:p-6 self-center   " style={{ backgroundColor: "#363940", height: "auto" }}>
-                            <div className="text-center text-white text-xl sm:text-lg font-light"><h2>Welcome Back !</h2></div>
+                            <div className="text-center text-white text-xl pb-2 sm:text-lg font-light"><h2>Welcome Back !</h2></div>
                             <FormGroup className="mb-4">
                             <Label className="flex items-center text-sm font-bold mb-2" for="email" style={{ color: "#8D9196" }}>
                                 Email

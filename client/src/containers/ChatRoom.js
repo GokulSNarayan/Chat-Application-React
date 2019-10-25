@@ -6,6 +6,7 @@ import LeftMenu from '../components/LeftMenu';
 import Input from '../components/inputMessage';
 import MainNav from '../components/MainNav';
 import { connect } from 'react-redux';
+import swal from 'sweetalert';
 
 
 
@@ -40,58 +41,88 @@ class ChatRoom extends React.Component {
                 user_name: 'Vineeth',
                 message: "Whats up"
             }
-           ],
+            ],
 
         }
     }
 
 
     componentDidMount() {
-        // this.getUserData();
-        this.props.socket.on('new message', (data) => {
-            this.updateHandler(data)
-            this.scrollToBottom();
-            console.log("dataaaaa", data)
-        })
+        if (this.props.socket) {
+            try {
+                this.props.socket.on('new message', (data) => {
+                    this.updateHandler(data)
+                    this.scrollToBottom();
+                    console.log("dataaaaa", data)
+                })
 
-        this.props.socket.on('get users', (data) => {
-            
-           this.setState({ users: data })
-           console.log("users===>>", data)
-       })
+                this.props.socket.on('get users', (data) => {
 
-
+                    this.setState({ users: data })
+                    console.log("users===>>", data)
+                })
+            }
+            catch (e) {
+                console.log("error", e)
+            }
+        } else {
+            console.log("From componentDidMount")
+            swal("Socket Connection Lost!", "Please Login Again", "error", {
+                buttons: false,
+                timer: 2000
+            });
+        }
         this.scrollToBottom();
-
     }
 
 
 
+
+
+
     componentWillUnmount() {
-        this.props.socket.on('disconnect', function () { });
+        try {
+            this.props.socket.on('disconnect', function () { });
+        }
+        catch (e) {
+            console.log("Error At componentWillUnmount", e)
+        }
     }
 
 
     updateHandler = (data) => {
 
         let newMessages = [...this.state.messages]
-        newMessages.push({...data,id:newMessages.length +1})
+        newMessages.push({ ...data, id: newMessages.length + 1 })
         // console.log("New message===>>",newMessages)
         this.setState({ messages: newMessages })
     }
 
     submitMessage = () => {
-        this.props.socket.emit("send message", this.state.message)
-        console.log("Socket id",this.props.socket)
-        this.setState({ message: "" })
+        if (this.props.socket) {
+            try {
+                this.props.socket.emit("send message", this.state.message)
+                console.log("Socket id", this.props.socket)
+                this.setState({ message: "" })
+            }
+            catch (e) {
+                console.log("error", e)
+            }
+        } else {
+            swal("Socket Connection Lost!", "Please Login Again", "error", {
+                buttons: false,
+                timer: 2000
+            });
+        }
     }
 
-    onKeyPressHandler= (event) => {
+    onKeyPressHandler = (event) => {
         // console.log(event.key)
-        if(event.key === 'Enter' && this.state.message !== ''){
+        if (event.key === 'Enter' && this.state.message !== '') {
+            event.preventDefault();
             this.submitMessage();
-        } 
-        
+        }
+
     }
 
     onMessageTypeHandler = (event) => {
@@ -166,6 +197,6 @@ const mapStateToProps = ({ authUser }) => {
 export default connect(
     mapStateToProps,
     {
-        
+
     }
 )(ChatRoom);
