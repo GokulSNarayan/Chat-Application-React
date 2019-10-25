@@ -1,6 +1,4 @@
 import React from 'react';
-import {NavItem,Nav } from 'reactstrap';
-// import { render } from 'timeago.js';
 import Contacts from './contacts';
 
 

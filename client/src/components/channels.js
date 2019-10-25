@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card,CardTitle,CardImg} from 'reactstrap';
-import img1 from '../images/img_avatar.png';
+import { Card,CardTitle} from 'reactstrap';
+
 
 
 const Channels = (props) => {

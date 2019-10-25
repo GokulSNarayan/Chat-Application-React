@@ -1,6 +1,5 @@
 import React from 'react';
-import { Nav, NavItem } from 'reactstrap';
-import { NavLink } from 'react-router-dom';
+
 
 
 const Topnav = (props) => {

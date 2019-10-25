@@ -2,7 +2,7 @@ import React,{Fragment} from 'react';
 import { Card, CardBody, CardTitle, CardText,CardImg } from 'reactstrap';
 import img1 from '../images/img_avatar.png';
 
-import moment from 'moment';
+
 const Chat = (props) => {
 
     return (

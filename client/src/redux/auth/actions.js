@@ -8,7 +8,7 @@ import {
     SET_SOCKET_DATA,
     LOGIN_USER_FAILED,
 } from '../actions';
-import { actionChannel } from 'redux-saga/effects';
+
 
 export const loginUser = (user, history) => ({
     type: LOGIN_USER,

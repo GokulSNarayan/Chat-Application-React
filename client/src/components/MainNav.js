@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import { Nav, NavItem } from 'reactstrap';
-import { NavLink } from 'react-router-dom';
-import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import Settings from './Settings';
 
 

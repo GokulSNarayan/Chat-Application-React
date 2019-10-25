@@ -6,14 +6,9 @@ import LeftMenu from '../components/LeftMenu';
 import Input from '../components/inputMessage';
 import MainNav from '../components/MainNav';
 import { connect } from 'react-redux';
-import { SOCKET_URL, API_URL } from '../constants/defaultValues';
-import axios from 'axios';
-import _ from 'lodash';
-const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': localStorage.getItem('token')
-}
-// var socket = require('socket.io-client')(SOCKET_URL);
+
+
+
 
 class ChatRoom extends React.Component {
     constructor(props) {
@@ -93,7 +88,7 @@ class ChatRoom extends React.Component {
 
     onKeyPressHandler= (event) => {
         // console.log(event.key)
-        if(event.key == 'Enter' && this.state.message != ''){
+        if(event.key === 'Enter' && this.state.message !== ''){
             this.submitMessage();
         } 
         

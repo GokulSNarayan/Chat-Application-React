@@ -1,8 +1,7 @@
 import io from 'socket.io-client';
-import { all, call, fork, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { all, fork, put, takeEvery} from 'redux-saga/effects';
 import { API_URL, SOCKET_URL } from '../../constants/defaultValues';
 import axios from 'axios';
-import { toastr } from 'react-redux-toastr';
 import swal from 'sweetalert';
 import {
     LOGIN_USER,
@@ -14,14 +13,13 @@ import {
     loginUserFailed,
     setUserData,
     setSocketData,
-    registerUserSuccess,
     registerUser
 } from './actions'
 
-const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': localStorage.getItem('token')
-}
+// const headers = {
+//     'Content-Type': 'application/json',
+//     'Authorization': localStorage.getItem('token')
+// }
 
 var socket = {};
 
@@ -35,7 +33,7 @@ function* loginWithEmailPassword({ payload }) {
     console.log("History======>>", payload)
     try {
         let result = yield axios.post(`${API_URL}/users/login`, { email, password })
-        if (result.data.status == 1) {
+        if (result.data.status === 1) {
             console.log("data========>>>", result)
             localStorage.setItem('token', result.data.token);
             try {
@@ -91,7 +89,7 @@ function* registerWithEmailPassword({ payload }) {
                 password: user.password
             });
             console.log("result at register===>>", result);
-            if (result.data.status == 1) {
+            if (result.data.status === 1) {
                 yield put(registerUser("success"))
                 // history.push('/');
             }

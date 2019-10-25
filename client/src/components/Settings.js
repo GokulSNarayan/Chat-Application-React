@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import { Nav, NavItem } from 'reactstrap';
-import { NavLink } from 'react-router-dom';
+import React from 'react';
 import { connect } from 'react-redux';
 import { logoutUser } from '../redux/actions';
 
