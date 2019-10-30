@@ -22,15 +22,15 @@ app.use(cors(corsOption));
 app.use(helmet())
 app.use(logger('dev'));
 app.use(express.json());
+app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'uploads')));
 mongoose.set('useFindAndModify', false);
 
-var indexRouter = require('./routes/index');
+
 var usersRouter = require('./routes/users');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
-app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 
