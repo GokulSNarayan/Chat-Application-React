@@ -26,27 +26,12 @@ class ChatRoom extends React.Component {
             }],
             user_name: "",
             message: '',
-            messages: [{
-                id: 1,
-                user_name: 'Gokul',
-                message: "Hai !!!!!"
-            },
-            {
-                id: 2,
-                user_name: 'Vineeth',
-                message: "Whats up"
-            },
-            {
-                id: 3,
-                user_name: 'Vineeth',
-                message: "Whats up"
-            }
-            ],
+            messages: [],
 
         }
     }
 
-
+    
     componentDidMount() {
         if (Object.keys(this.props.socket).length === 0) {
             // console.log("From componentDidMount")
@@ -61,7 +46,6 @@ class ChatRoom extends React.Component {
                 this.props.socket.on('new message', (data) => {
                     this.updateHandler(data)
                     this.scrollToBottom();
-                    // console.log("dataaaaa", data)
                 })
 
                 this.props.socket.on('get users', (data) => {
@@ -104,7 +88,7 @@ class ChatRoom extends React.Component {
     }
 
     submitMessage = () => {
-        if (this.props.socket) {
+        if (Object.keys(this.props.socket).length !== 0) {
             try {
                 this.props.socket.emit("send message", this.state.message)
                 // console.log("Socket id", this.props.socket)
@@ -122,8 +106,8 @@ class ChatRoom extends React.Component {
     }
 
     onKeyPressHandler = (event) => {
-        // console.log(event.key)
-        if (event.key === 'Enter' && this.state.message !== '') {
+        // console.log("Message",this.state.message)
+        if (event.key === 'Enter' && this.state.message.trim() !== '') {
             event.preventDefault();
             this.submitMessage();
         }
@@ -137,7 +121,16 @@ class ChatRoom extends React.Component {
 
 
     scrollToBottom = () => {
-        this.el.scrollIntoView({ behavior: 'auto' });
+        try{
+            // console.log("Length==>>",this.state.messages.length, this.el)
+        if(this.state.messages.length !== 0 && Object.keys(this.props.socket).length !== 0){
+
+            this.el.scrollIntoView({ behavior: 'auto' });
+        }
+        }
+        catch(err){
+            console.log(err)
+        }
     }
     render() {
 
@@ -160,7 +153,7 @@ class ChatRoom extends React.Component {
                         <div className="flex justify-end" style={{ height: "94vh" }}>
                             <div className="w-4/5 flex flex-col">
                                 <div className="overflow-y-auto order-2 pl-4 pr-1" id="style-1" style={{ height: "81vh", marginTop: "17" }}>
-                                    {this.state.messages.map(msg => {
+                                    {this.state.messages.length !==0 ? this.state.messages.map(msg => {
                                         return (
                                             <div key={msg.id} ref={el => { this.el = el; }}>
                                                 <Chat
@@ -168,10 +161,13 @@ class ChatRoom extends React.Component {
                                                     key={msg.id}
                                                     user_name={msg.user_name}
                                                     message={msg.message}
+                                                    date = {msg.date}
                                                 />
                                             </div>
                                         )
-                                    })}
+                                    }) : <div>
+                                        <h1 className="text-6xl text-center text-white">Type Something !!!</h1>
+                                    </div>}
                                 </div>
                                 <div className="flex items-stretch py-2 pt-4 px-4 order-3 align-center pt-2 border-t" style={{ borderColor: "#40444B" }}>
                                     <Input

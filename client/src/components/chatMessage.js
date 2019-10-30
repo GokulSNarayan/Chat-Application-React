@@ -1,7 +1,6 @@
 import React,{Fragment} from 'react';
 import { Card, CardBody, CardTitle, CardText,CardImg } from 'reactstrap';
 import img1 from '../images/img_avatar.png';
-import moment from 'moment';
 
 // var data = mo
 const Chat = (props) => {
@@ -15,7 +14,7 @@ const Chat = (props) => {
                 
                 <CardBody>
                     <CardTitle className="text-white px-2 pt-2 object-left-top w-40 text-md font-light">{props.user_name}
-                    <span style={{color:"#5D6067"}} className="px-2 text-sm font-light">{moment(Date.now()).format('LT')}</span></CardTitle>
+                    <span style={{color:"#5D6067"}} className="px-2 text-sm font-light">{props.date}</span></CardTitle>
                     <CardText style={{color:"#919396"}} className="font-thin px-2 pb-2 pl-4">{props.message}</CardText>
                 </CardBody>
             </Card>

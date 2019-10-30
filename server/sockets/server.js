@@ -1,6 +1,7 @@
 var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
+var moment = require('moment');
 var users = [];
 var connections = [];
 var sockets = [];
@@ -14,7 +15,8 @@ io.on("connection", (socket) => {
     let newData = {
       socket_id: socket.id,
       user_name: socket.username,
-      message: msg
+      message: msg,
+      date: moment(Date.now()).format('LT')
     }
     console.log("Messg",socket.username)
       io.emit('new message',newData);
