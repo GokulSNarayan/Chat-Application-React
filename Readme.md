@@ -1,7 +1,7 @@
 # Chat Application React 
 
 ## Getting Started
-Run **npm install** in 
+### Run **npm install** in 
 * client 
 * server  
 * server/socket 
