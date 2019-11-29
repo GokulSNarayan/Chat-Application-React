@@ -1,21 +1,26 @@
 # Chat Application React 
 
+## Getting Started
+Run **npm install** in 
+* client 
+* server  
+* server/socket 
 
-To Start the Application:
-Go to server/ and run ===>npm install and node app.js
-Go to server/sockets and run ===>npm install and node server.js
-
-Go to http://localhost:4000/
 
 
-Developement version:
-
-Authentication server:
-Go to server folder and run ===>npm install and node app.js
-
-Socket server:
-Go to server/sockets and run ===>npm install and node server.js  
-
-Go to client/ folder and run ===>npm install and npm start
+### To Start the Application
+* In **server/**  run
+``
+node app.js
+``
+* In **server/sockets** run
+``
+node server.js
+``
+* Go to http://localhost:4000/
+* In **client/** run
+``
+npm start
+``
 
 
